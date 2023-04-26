@@ -1,3 +1,25 @@
+
+This is a reproduction of `@microsoft/fast-foundation` web components project using:
+-  `@storybook/html@6.5.9`
+-  `rollup@^2.7.1`
+-  yarn
+-  `typescript@^4.7.0`
+-  `@microsoft/fast-element@^2.0.0-beta.21`,
+
+It is plucked straight from the monorepo at [@microsoft/fast](https://github.com/microsoft/fast)
+
+## Run it
+
+`yarn` to install deps
+
+`yarn start` to run Storybook
+
+## Related OSS issues:
+- https://github.com/storybookjs/storybook/issues/22219
+- https://github.com/microsoft/fast/issues/6698
+
+-----------
+
 # FAST Foundation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
