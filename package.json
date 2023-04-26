@@ -1,0 +1,105 @@
+{
+  "name": "fast-foundation-rollup-storybook",
+  "description": "An isolated reproduction of FAST foundation components with @storybook/html",
+  "sideEffects": false,
+  "version": "3.0.0-alpha.25",
+  "author": {
+    "name": "Microsoft",
+    "url": "https://discord.gg/FcSNfg4"
+  },
+  "homepage": "https://www.fast.design/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Microsoft/fast.git",
+    "directory": "packages/web-components/fast-foundation"
+  },
+  "bugs": {
+    "url": "https://github.com/Microsoft/fast/issues/new/choose"
+  },
+  "main": "dist/esm/index.js",
+  "types": "dist/dts/index.d.ts",
+  "unpkg": "dist/fast-foundation.min.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./design-token-core": {
+      "types": "./dist/dts/design-token/core/exports.d.ts",
+      "default": "./dist/esm/design-token/core/exports.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean:dist": "rimraf dist storybook-static",
+    "doc": "api-extractor run --local",
+    "doc:ci": "api-extractor run",
+    "build:rollup": "rollup -c",
+    "build:storybook": "build-storybook",
+    "build:tsc": "tsc -p ./tsconfig.build.json",
+    "prebuild": "yarn build:tsc",
+    "build": "yarn build:rollup",
+    "postbuild": "yarn doc && yarn cem",
+    "dev": "tsc -p ./tsconfig.build.json -w",
+    "cem": "yarn cem-analyze && yarn cem-markdown",
+    "cem-analyze": "cem analyze",
+    "cem-markdown": "node CEMToMarkdown.mjs",
+    "tdd": "yarn dev & yarn test-chrome:watch",
+    "tdd:firefox": "yarn dev & yarn test-firefox:watch",
+    "prepare": "yarn clean:dist && yarn build",
+    "prettier": "prettier --config ../../../.prettierrc --write \"**/*.ts\"",
+    "prettier:diff": "prettier --config ../../../.prettierrc \"**/*.ts\" --list-different",
+    "eslint": "eslint . --ext .ts",
+    "eslint:fix": "eslint . --ext .ts --fix",
+    "pretest": "yarn eslint && yarn build-storybook --quiet",
+    "test": "playwright test",
+    "posttest:ci": "yarn doc:ci",
+    "start": "yarn start:storybook",
+    "start:storybook": "start-storybook -p 6006"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@custom-elements-manifest/to-markdown": "^0.1.0",
+    "@microsoft/api-extractor": "7.24.2",
+    "@microsoft/tsdoc-config": "^0.13.4",
+    "@playwright/test": "^1.25.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@storybook/addon-docs": "6.5.10",
+    "@storybook/addon-essentials": "6.5.10",
+    "@storybook/addon-links": "6.5.10",
+    "@storybook/builder-webpack5": "6.5.10",
+    "@storybook/csf": "0.0.2--canary.0899bb7.0",
+    "@storybook/html": "6.5.10",
+    "@storybook/manager-webpack5": "6.5.10",
+    "concurrently": "^7.3.0",
+    "esm": "^3.2.25",
+    "express": "^4.18.1",
+    "expect": "29.2.1",
+    "prettier": "2.0.2",
+    "qs": "^6.11.0",
+    "resolve-typescript-plugin": "^1.2.0",
+    "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-transform-tagged-template": "^0.0.3",
+    "rollup": "^2.71.1",
+    "source-map-loader": "^0.2.4",
+    "source-map": "^0.7.3",
+    "svg-inline-loader": "^0.8.2",
+    "ts-loader": "^7.0.2",
+    "ts-node": "^8.9.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.7.0",
+    "wait-on": "^6.0.1"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.0.3",
+    "@microsoft/fast-element": "^2.0.0-beta.21",
+    "@microsoft/fast-web-utilities": "^6.0.0",
+    "tabbable": "^5.2.0",
+    "tslib": "^2.4.0"
+  },
+  "customElements": "dist/custom-elements.json"
+}
